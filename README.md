@@ -29,24 +29,28 @@
 
 ## 界面
 
-<!-- 截图就位后取消下面注释。文件名与 docs/images/README.md 保持一致 -->
-<!--
 <p align="center">
-  <img src="docs/images/check.png" width="30%" alt="体检全绿" />
-  <img src="docs/images/broken.png" width="30%" alt="无障碍被关闭" />
-  <img src="docs/images/fix.png" width="30%" alt="修复跳转" />
+  <img src="docs/images/check.png" width="30%" alt="一切正常" />
+  <img src="docs/images/broken.png" width="30%" alt="发现 2 个问题" />
+  <img src="docs/images/fix.png" width="30%" alt="点修复后落到 AdAway" />
 </p>
--->
 
-主界面是一张体检单，每项后面直接写结论：
+<p align="center">
+  <sub>一键体检 → 定位问题 → 跳到该去的地方</sub>
+</p>
+
+主界面是一张体检单，每项后面直接写结论，出问题时直接给出下一步动作：
 
 ```
-✓ GKD 已安装
-✓ GKD 无障碍已开启
-✗ AdAway 已安装          ← 没装
-— DNS 拦截已连接          ← 上一项没通过，跳过
-— 广告域名已拦截 4/4
+✗ DNS 拦截未连接
+     AdAway 的 VPN 没在跑，打开它点一下启动
+✗ 广告域名没被拦（0/4 生效）
+    域名能解析到真实地址，说明规则没生效，去 AdAway 重新应用
 ```
+
+> 中间那张图是真机实拍的故障现场：**AdAway 首页显示「已阻止 187210 次」，
+> 看起来一切正常，但 `tun0` 根本没起来，广告域名照常解析。**
+> 这正是这个 App 存在的理由 —— 计数器会骗人，真实解析不会。
 
 ---
 
