@@ -29,12 +29,12 @@
 
 ## 界面
 
-<!-- 待补：3 张手机截图放到 docs/images/，然后取消下面的注释 -->
+<!-- 截图就位后取消下面注释。文件名与 docs/images/README.md 保持一致 -->
 <!--
 <p align="center">
-  <img src="docs/images/check.png" width="30%" />
-  <img src="docs/images/ok.png" width="30%" />
-  <img src="docs/images/broken.png" width="30%" />
+  <img src="docs/images/check.png" width="30%" alt="体检全绿" />
+  <img src="docs/images/broken.png" width="30%" alt="无障碍被关闭" />
+  <img src="docs/images/fix.png" width="30%" alt="修复跳转" />
 </p>
 -->
 
