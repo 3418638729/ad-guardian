@@ -2,6 +2,16 @@
 
 一个只干一件事的小工具：**检查手机上的去广告链路有没有断，断了告诉你断在哪、该去点哪里。**
 
+![Android](https://img.shields.io/badge/Android-7.0%2B-3DDC84?logo=android&logoColor=white)
+![Java](https://img.shields.io/badge/Java-11-ED8B00?logo=openjdk&logoColor=white)
+![Root](https://img.shields.io/badge/免%20root-不需要-22C55E)
+![Deps](https://img.shields.io/badge/第三方依赖-0-6B7280)
+
+> 两个 Java 源文件、零第三方依赖。没有网络请求，不上传任何数据 ——
+> 它只读本机的安装列表、系统设置和 DNS 解析结果。
+
+---
+
 ## 为什么要它
 
 手机去广告通常靠两套互不相干的机制：
@@ -14,6 +24,31 @@
 两套机制任何一套断了，你看到的都是「还有广告」，但原因完全不同。
 
 最常见的是**系统偷偷把无障碍关掉**（小米尤其容易），GKD 进程还活着、界面看着正常，实际已经读不了屏。手动排查要翻好几层设置。这个 App 就是把这件事变成点一下。
+
+---
+
+## 界面
+
+<!-- 待补：3 张手机截图放到 docs/images/，然后取消下面的注释 -->
+<!--
+<p align="center">
+  <img src="docs/images/check.png" width="30%" />
+  <img src="docs/images/ok.png" width="30%" />
+  <img src="docs/images/broken.png" width="30%" />
+</p>
+-->
+
+主界面是一张体检单，每项后面直接写结论：
+
+```
+✓ GKD 已安装
+✓ GKD 无障碍已开启
+✗ AdAway 已安装          ← 没装
+— DNS 拦截已连接          ← 上一项没通过，跳过
+— 广告域名已拦截 4/4
+```
+
+---
 
 ## 三个按钮
 
@@ -35,6 +70,8 @@
 
 检测时会先解析一个对照域名（`www.baidu.com`）确认网络是通的，否则断网会让所有域名都解析失败，误判成「全拦住了」。
 
+---
+
 ## 为什么「修复」是跳转而不是自动改
 
 普通 App 没有 `WRITE_SECURE_SETTINGS` 权限，改不了系统的无障碍开关；也不能替别的 App 启停 VPN。这是 Android 的安全边界，绕不过去。
@@ -42,6 +79,8 @@
 所以这里的修复是**精准跳转**：检测出哪一段断了，直接把你送到那一页，并提示该点哪里。不假装已经修好。
 
 如果以后要全自动，可以接 [Shizuku](https://github.com/RikkaApps/Shizuku)，用 adb 授权一次后就能直接改。
+
+---
 
 ## 构建
 
@@ -58,3 +97,20 @@ gradle assembleDebug
 - [GKD](https://github.com/gkd-kit/gkd)（开源）
 
 本 App 不替代它们，只是它们的体检工具。
+
+---
+
+## 关于作者
+
+工科在读，写 Python 和 Android 小工具。
+
+这个 App 的起因是：我自己手机上 AdAway 明明显示在跑，广告却回来了。
+翻设置翻了半小时才发现是 VPN 隧道断了而进程还活着。
+后来想明白 —— **「看起来正常」和「真的在工作」是两件事**，
+所以这个 App 的核心判据不是查状态，是真的去 `InetAddress.getByName()` 解析广告域名。
+
+**想加检测项、遇到问题、或者需要类似的小工具定制，欢迎开 [Issue](../../issues)。**
+
+## 许可
+
+MIT
